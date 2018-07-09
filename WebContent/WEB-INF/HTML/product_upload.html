@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>上传excel文件</title>
+</head>
+<body>
+	<form id="form1"   enctype="multipart/form-data">                
+    <tr>
+        <td width="25%" align="right">上传文件：</td>
+        <td><input id="excel" type="file" name="excel" style="width:300px;"></td>
+    </tr>
+    <tr align="center" valign="middle">
+        <td height="60" colspan="2"><input type="button" ID="BtnOK"  value="确认上传"></td>
+    </tr>
+</form>    
+
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript">
+
+	$("#BtnOK").click(function () {
+        var formData = new FormData($('#form1')[0]);
+        $.ajax({
+            type: 'post',
+            url: "../product/product_list",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+        }).success(function (data) {
+        	layer.msg('添加成功!',{icon:1,time:1000});
+ 			window.location.href = "../HTML/index.html";
+        }).error(function () {
+        	layer.msg('添加失败!',{icon:1,time:1000});
+        });
+    });
+
+
+
+</script>
+
+</body>
+</html>
